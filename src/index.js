@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const TrafficLight = (props) => {
+
+  const [active, setActive] = useState("")
+
+  function cambiarEstado (e) {
+    setActive(e.target.className)
+  }
+
+
+  return (
+    <div className='semaforo'>
+      <div className={'red-light' + (active === 'red-light' ? "-active" : "")} onClick={(e) => cambiarEstado(e)}></div>
+      <div className={'yellow-light' + (active === 'yellow-light' ? "-active" : "")} onClick={(e) => cambiarEstado(e)}></div>
+      <div className={'green-light' + (active === 'green-light' ? "-active" : "")} onClick={(e) => cambiarEstado(e)}></div>
+    </div>
+
+  )
+}
+
+
+
+const App = () => {
+  return (
+    <>
+      <h2>Traffic Light</h2>
+      <div className='container'>
+        <TrafficLight />
+      </div>
+
+    </>
+  )
+}
+
+
+ReactDOM.render(<App />, document.getElementById('root'))
